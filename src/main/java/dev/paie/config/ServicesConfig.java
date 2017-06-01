@@ -6,12 +6,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 import dev.paie.spring.DataSourceMySQLConfig;
+import dev.paie.spring.JpaConfig;
 
 @Configuration
 @ComponentScan("dev.paie.service")
 @ComponentScan("dev.paie.util")
 @ImportResource("jdd-config.xml")
-@Import(DataSourceMySQLConfig.class)
+@Import({DataSourceMySQLConfig.class,JpaConfig.class})
 public class ServicesConfig {
 
 }
