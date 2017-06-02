@@ -24,7 +24,7 @@ public class GradeServiceJdbcTemplate implements GradeService {
 	@Override
 	public void sauvegarder(Grade nouveauGrade) {
 		// TODO Auto-generated method stub
-			String sql = "INSERT INTO GRADE (id,code,nbHeureBase,tauxBase) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO GRADE (id,code,nbHeuresBase,tauxBase) VALUES(?,?,?,?)";
 			this.jdbcTemplate.update(sql, nouveauGrade.getId(), nouveauGrade.getCode(),nouveauGrade.getNbHeuresBase(),nouveauGrade.getTauxBase());
 
 	}
@@ -32,20 +32,17 @@ public class GradeServiceJdbcTemplate implements GradeService {
 	@Override
 	public void mettreAJour(Grade grade) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE GRADE SET code = ?, nbHeureBase =?, tauxBase=? WHERE ID = ?";
-		this.jdbcTemplate.update(sql, grade.getCode(),grade.getNbHeuresBase(),grade.getTauxBase(),grade.getId());
+		String sql = "UPDATE GRADE SET nbHeuresBase =?, tauxBase=? WHERE code= ?";
+		this.jdbcTemplate.update(sql,grade.getNbHeuresBase(),grade.getTauxBase(), grade.getCode());
 
 	}
 
 	@Override
 	public List<Grade> lister() {
-		String sql = "SELECT * FROM GRADE";
+		String sql = "SELECT * FROM `grade`";
 		return this.jdbcTemplate.query(sql, (rs,rowNum)-> {
-			Grade grade = new Grade();
+			Grade grade = new Grade(rs.getString("CODE"),new BigDecimal(rs.getString("nbHeuresBase")),new BigDecimal(rs.getString("tauxBase")));
 			grade.setId(rs.getInt("ID"));
-			grade.setCode(rs.getString("CODE"));
-			grade.setNbHeuresBase(new BigDecimal(rs.getString("nbHeureBase")));
-			grade.setTauxBase(new BigDecimal(rs.getString("tauxBase")));
 			return grade;
 		});
 	}
