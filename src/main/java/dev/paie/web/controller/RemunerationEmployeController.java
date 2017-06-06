@@ -3,6 +3,7 @@ package dev.paie.web.controller;
 import java.time.ZonedDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +29,18 @@ public class RemunerationEmployeController {
 	private GradeService grades;
 	@Autowired
 	private RemunerationEmployeRepository rememp;
+	
 	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	@Secured({"ROLE_ADMINISTRATEUR","ROLE_UTILISATEUR"})
 	public ModelAndView listerEmploye() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("employes/listerEmploye");
 		mv.addObject("remunerations", rememp.findAll());
 		return mv;
 	}	
+	
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerEmploye() {
 
 		ModelAndView mv = new ModelAndView();

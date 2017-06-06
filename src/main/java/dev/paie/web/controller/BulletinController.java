@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,6 @@ import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
 import dev.paie.service.CalculerRemunerationService;
-import dev.paie.service.CalculerRemunerationServiceSimple;
 
 @Controller
 @RequestMapping("/bulletins")
@@ -35,6 +34,7 @@ public class BulletinController {
 	@Autowired
 	private CalculerRemunerationService calcul;
 	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	@Secured({"ROLE_ADMINISTRATEUR","ROLE_UTILISATEUR"})
 	public ModelAndView listerBulletin() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/listerBulletins");
@@ -47,6 +47,7 @@ public class BulletinController {
 		return mv;
 	}
 	 @RequestMapping(method = RequestMethod.GET, path = "/creer")
+	 @Secured("ROLE_ADMINISTRATEUR")
 	 public ModelAndView creerbulletin() {
 	
 	 ModelAndView mv = new ModelAndView();

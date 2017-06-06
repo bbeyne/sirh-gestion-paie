@@ -5,7 +5,7 @@
 <a href="/paie/mvc/bulletins/lister">Bulletin</a>
 
 <form class="form-horizontal" method="post">
-	
+	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 	<fieldset>
 	<legend>Créer un bulletin</legend>
 		
