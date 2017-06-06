@@ -1,6 +1,8 @@
 package dev.paie.entite;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,15 +21,17 @@ public class BulletinSalaire {
 	@ManyToOne
 	private Periode periode;
 	private BigDecimal primeExceptionnelle;
+	private ZonedDateTime dateCreation;
 	
 	public BulletinSalaire() {
 		super();
 	}
-	public BulletinSalaire(RemunerationEmploye remunerationEmploye, Periode periode, BigDecimal primeExceptionnelle) {
+	public BulletinSalaire(ZonedDateTime date, RemunerationEmploye remunerationEmploye, Periode periode, BigDecimal primeExceptionnelle) {
 		super();
 		this.remunerationEmploye = remunerationEmploye;
 		this.periode = periode;
 		this.primeExceptionnelle = primeExceptionnelle;
+		this.dateCreation=date;
 	}
 	public RemunerationEmploye getRemunerationEmploye() {
 		return remunerationEmploye;
@@ -54,6 +58,17 @@ public class BulletinSalaire {
 		this.id = id;
 	}
 	
+
+	public ZonedDateTime getDatecreation() {
+		
+		return dateCreation;
+	}
+	public void setDatecreation(ZonedDateTime datecreation) {
+		this.dateCreation = datecreation;
+	}
 	
+	public String dateform(){
+		return dateCreation.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss"));
+	}
 	
 }

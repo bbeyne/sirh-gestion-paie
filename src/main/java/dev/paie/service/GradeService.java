@@ -12,5 +12,7 @@ public interface GradeService {
 
 		List<Grade> lister();
 
+		Grade findbyId(Integer Id);
+
 		
 }

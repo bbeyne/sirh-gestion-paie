@@ -1,17 +1,18 @@
-
+<%@page import="java.util.List"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <a href="/paie/mvc/employes/lister">Employe</a>
 <a href="/paie/mvc/bulletins/lister">Bulletin</a>
-<center>
-	<h1>Ajouter un employé</h1>
-</center>
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post">
+	
 	<fieldset>
+	<legend>Ajouter un employÃ©</legend>
 		<!-- Text input-->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="textinput">Matricule</label>
 			<div class="col-md-4">
-				<input id="textinput" name="textinput" type="text" placeholder=""
+				<input id="matricule" name="matricule" type="text" placeholder=""
 					class="form-control input-md">
 
 			</div>
@@ -21,9 +22,11 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="selectmultiple">Entreprise</label>
 			<div class="col-md-4">
-				<select id="selectmultiple" name="selectmultiple"
-					class="form-control" multiple="multiple">
-					<option>${Entreprise.findOne(0).getDenomination()}</option>
+				<select id="entreprise" name="entreprise"
+					class="form-control">
+					<c:forEach var="entrep" items="${entreprise}">
+						<option value="${entrep.id}">${entrep.denomination}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -32,8 +35,11 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="selectmultiple">Profil</label>
 			<div class="col-md-4">
-				<select id="selectmultiple" name="selectmultiple"
-					class="form-control" multiple="multiple">
+				<select id="profil" name="profil"
+					class="form-control">
+					<c:forEach var="profil" items="${profils}">
+						<option value="${profil.id}">${profil.code}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -42,8 +48,11 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="selectmultiple">Grade</label>
 			<div class="col-md-4">
-				<select id="selectmultiple" name="selectmultiple"
-					class="form-control" multiple="multiple">
+				<select id="grade" name="grade"
+					class="form-control">
+					<c:forEach var="grade" items="${grades}">
+						<option value="${grade.id}">${grade.code}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>

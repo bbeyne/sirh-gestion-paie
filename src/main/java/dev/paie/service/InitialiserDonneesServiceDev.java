@@ -2,6 +2,7 @@ package dev.paie.service;
 
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,11 @@ import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
+import dev.paie.entite.RemunerationEmploye;
 import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilRemRepository;
+import dev.paie.repository.RemunerationEmployeRepository;
 
 @Service
 public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
@@ -35,6 +38,8 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	private ProfilRemRepository profil;
 	@Autowired
 	private PeriodeRepository perioderep;
+	@Autowired 
+	private RemunerationEmployeRepository remrep;
 	
 	@Override
 	public void initialiser() {
@@ -54,6 +59,7 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		List<ProfilRemuneration> profils = new ArrayList<>();
 		profils.addAll(context.getBeansOfType(ProfilRemuneration.class).values());
 		profil.save(profils);
+		remrep.save(new RemunerationEmploye(ZonedDateTime.now(),"courgette", entreprises.get(1), profils.get(1), gradeserv.lister().get(1)));
 		
 		for (int i=1; i<13;i++){
 		LocalDate localdate = LocalDate.of(LocalDate.now().getYear(), i, 1);

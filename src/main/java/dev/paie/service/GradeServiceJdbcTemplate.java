@@ -46,4 +46,9 @@ public class GradeServiceJdbcTemplate implements GradeService {
 			return grade;
 		});
 	}
+	@Override
+	public Grade findbyId(Integer Id){
+		return lister().stream().filter(t->t.getId()==Id).findFirst().get();
+	}
+	
 }
