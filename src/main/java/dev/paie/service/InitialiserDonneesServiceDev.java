@@ -69,7 +69,7 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		List<ProfilRemuneration> profils = new ArrayList<>();
 		profils.addAll(context.getBeansOfType(ProfilRemuneration.class).values());
 		profil.save(profils);
-		remrep.save(new RemunerationEmploye(ZonedDateTime.now(),"courgette", entreprises.get(1), profils.get(1), gradeserv.lister().get(1)));
+		remrep.save(new RemunerationEmploye(ZonedDateTime.now(),"Warsama", entreprises.get(1), profils.get(1), gradeserv.lister().get(1)));
 		
 		for (int i=1; i<13;i++){
 		LocalDate localdate = LocalDate.of(LocalDate.now().getYear(), i, 1);
